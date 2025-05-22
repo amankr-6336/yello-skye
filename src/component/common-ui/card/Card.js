@@ -2,13 +2,15 @@ import React from 'react';
 import styles from './card.module.css';
 import PropTypes from 'prop-types';
 
-export default function Card({onClick, children, variant = 'default', padding = 'medium', shadow = 'small' }) {
-  const className = `${styles.card} ${styles[variant]} ${styles[padding]} ${styles[shadow]}`;
+export default function Card({onClick,size ,children, variant = 'default', padding = 'medium', shadow = 'small' }) {
+  const className = `${styles.card} ${styles[size]} ${styles[variant]} ${styles[padding]} ${styles[shadow]}`;
   return <div onClick={onClick} className={className}>{children}</div>;
 }
 
 Card.propTypes = {
+  onClick:PropTypes.func,
   children: PropTypes.node.isRequired,
+  size:PropTypes.oneOf(['projectBox','contentBox','authBox']),
   variant: PropTypes.oneOf(['default', 'outlined']),
   padding: PropTypes.oneOf(['small', 'medium', 'large']),
   shadow: PropTypes.oneOf(['none', 'small', 'medium', 'large']),

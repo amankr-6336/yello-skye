@@ -46,3 +46,20 @@
 .large {
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
 }
+
+/* size */
+
+.projectBox{
+  width: 250px;
+  height: 100px;
+}
+
+.contentBox{
+  width: 300px;
+  height: 200px;
+}
+
+.authBox{
+  width: 400px;
+  height: fit-content;
+}
