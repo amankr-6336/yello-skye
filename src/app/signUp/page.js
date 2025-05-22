@@ -5,6 +5,8 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../lib/firebase/Firebase";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import Input from "@/component/common-ui/input/Input";
+import Button from "@/component/common-ui/button/Button";
 
 export default function SignupPage() {
   const [email, setEmail] = useState("");
@@ -30,13 +32,12 @@ export default function SignupPage() {
 
       toast.success("Signup successful! 🎉 Redirecting...");
       console.log(userCredential);
-      setTimeout(() => router.push('/dashboard'), 1000);
-
+      setTimeout(() => router.push("/dashboard"), 1000);
     } catch (err) {
       const friendlyMessage = getFriendlyError(err.code);
       setError(friendlyMessage);
       toast.error(friendlyMessage);
-    }finally {
+    } finally {
       setLoading(false);
     }
   };
@@ -58,32 +59,33 @@ export default function SignupPage() {
     <div style={{ maxWidth: 400, margin: "auto", paddingTop: 100 }}>
       <h2>Sign Up</h2>
       <form onSubmit={handleSignup}>
-        <input
+        <Input
+          label="Name"
           type="text"
           placeholder="Name"
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
-          required
         />
-        <input
+        <Input
+          label="Email"
           type="email"
-          placeholder="Email"
+          placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          required
         />
-        <input
+        <Input
+          label="Password"
           type="password"
           placeholder="Password (6+ characters)"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          required
         />
 
         {error && <p style={{ color: "red" }}>{error}</p>}
-        <button type="submit" style={{ marginTop: 12 }} disabled={loading}>
-          {loading ? "Signing up..." : "Sign Up"}
-        </button>
+
+        <Button size="small" type="primary">
+          {loading ? "Signing in..." : "SignIn"}
+        </Button>
       </form>
     </div>
   );
