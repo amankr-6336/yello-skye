@@ -6,7 +6,7 @@ import Card from "@/component/common-ui/card/Card";
 function video() {
   return (
      <div style={{padding:"10px"}}>
-        <p>Videos</p>
+        <h3 style={{margin:"10px"}}> Videos</h3>
         <div style={{display:"flex",gap:"10px" , flexWrap:"wrap"}}>
           {sampleProjects[0].images.map((data, index) => (
             <Card key={index} size='contentBox' padding="small" shadow="medium">

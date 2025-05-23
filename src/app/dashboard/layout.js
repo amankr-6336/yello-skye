@@ -1,6 +1,5 @@
 import Navbar from '@/component/navbar/Navbar';
 
-
 export const metadata = {
   title: 'Dashboard',
 };

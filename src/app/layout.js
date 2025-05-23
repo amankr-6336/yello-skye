@@ -4,7 +4,8 @@ import { Provider } from "react-redux";
 import { store } from "../redux/Store";
 import AuthListener from "../component/AuthListner";
 import { Toaster } from 'react-hot-toast';
-
+import RouteLoader from "./loading-indicator/RouteLoader";
+import './globals.css'
 
 export default function RootLayout({ children }) {
   return (
@@ -12,6 +13,7 @@ export default function RootLayout({ children }) {
       <body style={{boxSizing:"border-box", margin:"0" ,padding:"0"}} >
         <Provider store={store}>
           <AuthListener />
+            <RouteLoader />
           {children}
           <Toaster position="top-center" />
         </Provider>

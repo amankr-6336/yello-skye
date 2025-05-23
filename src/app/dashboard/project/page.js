@@ -8,35 +8,57 @@ import Button from "@/component/common-ui/button/Button";
 
 function ProjectsPage() {
   const [projects, setProjects] = useState(sampleProjects);
-   const router = useRouter();
+  const router = useRouter();
 
   const handleCardClick = (projectid) => {
-    // You can also use project.id or a slug instead
     router.push(`/dashboard/project/${encodeURIComponent(projectid)}`);
+  };
+
+  const handleNaviagteToSection = (projectid, section, e) => {
+    e.stopPropagation();
+    router.push(
+      `/dashboard/project/${encodeURIComponent(projectid)}/${section}`
+    );
   };
 
   return (
     <div
       style={{
-        border: "2px solid red",
         padding: "10px",
         height: "fit-content",
       }}
     >
-      <div style={{ border: "2px solid red", marginBottom: "20px" }}>
-        <h4>Projects</h4>
+      <div style={{ marginBottom: "20px" }}>
+        <h3 style={{ margin: "10px" }}> Projects</h3>
       </div>
+
       <div style={{ display: "flex", gap: "15px", flexWrap: "wrap" }}>
         {projects.map((project, index) => (
-          <Card variant="outlined" key={index} onClick={()=>handleCardClick(project.id)}>
+          <Card
+            variant="outlined"
+            key={index}
+            onClick={() => handleCardClick(project.id)}
+          >
             <div>
               <p>{project.name}</p>
               <hr />
-              <div style={{display:"flex",gap:"10px"}}>
-                <Button type="secondary" size="small">
+              <div style={{ display: "flex", gap: "10px" }}>
+                <Button
+                  type="secondary"
+                  size="small"
+                  onClick={(e) =>
+                    handleNaviagteToSection(project.id, "images", e)
+                  }
+                >
                   {project.images.length} images
                 </Button>
-                <Button type="secondary" size="small">
+                <Button
+                  type="secondary"
+                  size="small"
+                  onClick={(e) =>
+                    handleNaviagteToSection(project.id, "videos", e)
+                  }
+                >
                   {project.videos.length} videos
                 </Button>
               </div>
