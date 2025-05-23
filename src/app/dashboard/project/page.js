@@ -8,9 +8,8 @@ import Button from "@/component/common-ui/button/Button";
 import styles from  './ProjectListing.module.css'
 
 function ProjectsPage() {
-  const [projects, setProjects] = useState(sampleProjects);
-  const router = useRouter();
-
+ 
+  const router=useRouter();
   const handleCardClick = (projectid) => {
     router.push(`/dashboard/project/${encodeURIComponent(projectid)}`);
   };
@@ -34,7 +33,7 @@ function ProjectsPage() {
       </div>
 
       <div style={{ display: "flex", gap: "15px", flexWrap: "wrap" }}>
-        {projects.map((project, index) => (
+        {sampleProjects.map((project, index) => (
           <Card
             variant="outlined"
             key={index}
