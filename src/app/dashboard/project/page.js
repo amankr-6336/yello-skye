@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { sampleProjects } from "@/sampledata/Data";
 import Card from "@/component/common-ui/card/Card";
 import Button from "@/component/common-ui/button/Button";
+import styles from  './ProjectListing.module.css'
 
 function ProjectsPage() {
   const [projects, setProjects] = useState(sampleProjects);
@@ -39,7 +40,7 @@ function ProjectsPage() {
             key={index}
             onClick={() => handleCardClick(project.id)}
           >
-            <div>
+            <div className={styles.cardSection}>
               <p>{project.name}</p>
               <hr />
               <div style={{ display: "flex", gap: "10px" }}>
