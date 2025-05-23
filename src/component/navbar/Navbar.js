@@ -21,7 +21,7 @@ export default function Navbar() {
   const handleLogout=async ()=>{
      await signOut(auth)
     //  router.push('/login');
-     setTimeout(() => router.push("/dashboard/project"), 1000);
+     window.location.href = "/login"
       toast.success("Logged Out!");
   }
 
