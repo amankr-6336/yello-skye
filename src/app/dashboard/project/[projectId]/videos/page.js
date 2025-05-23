@@ -1,28 +1,30 @@
 import React from "react";
-import Image from "next/image";
 import { sampleProjects } from "@/sampledata/Data";
 import Card from "@/component/common-ui/card/Card";
+import { FaFileVideo } from "react-icons/fa";
 
-function video() {
+
+function video({params}) {
+    const projectId = params.projectId;
+    const project=sampleProjects.find((data)=> Number(projectId)===data.id);
   return (
-     <div style={{padding:"10px"}}>
-        <h3 style={{margin:"10px"}}> Videos</h3>
-        <div style={{display:"flex",gap:"10px" , flexWrap:"wrap"}}>
-          {sampleProjects[0].images.map((data, index) => (
-            <Card key={index} size='contentBox' padding="small" shadow="medium">
-              <Image
-                src={data.url}
-                alt={data.title}
-                width={300}
-                height={200}
-                style={{ objectFit: "cover",height:"80%" }}
-              />
-              <p style={{height:"20%"}}>{data.title}</p>
-            </Card>
-          ))}
-        </div>
-        </div>
-  )
+    <div style={{ padding: "10px" }}>
+      <h3 style={{ margin: "10px" }}> Videos</h3>
+      <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+        {project.videos.map((data, index) => (
+          <Card key={index} size="contentBox" padding="small" shadow="medium">
+            <div style={{display:"flex",flexDirection:"column",gap:"10px",height:"100%"}}>
+              <div style={{flex:"5",backgroundColor:"grey" ,display:"flex",justifyContent:"center",alignItems:"center"}}>
+                <FaFileVideo style={{fontSize:"2rem"}} />
+              </div>
+
+              <h4 style={{ flex:"1" }}>{data.title}</h4>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
 }
 
-export default video
+export default video;
