@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Button from "@/component/common-ui/button/Button.js";
 import Input from "@/component/common-ui/input/Input.js";
+import Link from "next/link";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -24,7 +25,7 @@ export default function LoginPage() {
       const response = await signInWithEmailAndPassword(auth, email, password);
       console.log(response);
       toast.success("Login successful! 🎉 Redirecting...");
-      setTimeout(() => router.push("/dashboard"), 1000);
+      setTimeout(() => router.push("/dashboard/project"), 1000);
     } catch (err) {
       const friendlyMessage = getFriendlyError(err.code);
       setError(friendlyMessage);
@@ -81,6 +82,7 @@ export default function LoginPage() {
         <Button size="small" type="primary">
           {loading ? "Logging in..." : "Login"}
         </Button>
+        <Link href="/forgot-password">Forgot Password?</Link>
       </form>
     </div>
   );

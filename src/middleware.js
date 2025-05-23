@@ -10,18 +10,18 @@ export function middleware(request) {
   if (path === "/") {
     console.log("main")
     if (token) {
-      url.pathname = "/dashboard";
+      url.pathname = "/dashboard/project";
     } else {
       url.pathname = "/login";
     }
     return NextResponse.redirect(url);
   }
 
-  // if (path.startsWith("/dashboard") && !token) {
-  //   console.log("dahs")
-  //   url.pathname = "/login";
-  //   return NextResponse.redirect(url);
-  // }
+  if (path.startsWith("/dashboard") && !token) {
+    console.log("dahs")
+    url.pathname = "/login";
+    return NextResponse.redirect(url);
+  }
 
   return NextResponse.next();
 }

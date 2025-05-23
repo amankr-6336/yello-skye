@@ -7,9 +7,13 @@ import Card from "@/component/common-ui/card/Card";
 import Button from "@/component/common-ui/button/Button";
 import styles from "./ProjectListing.module.css";
 import SearchBar from "@/component/searchbar/SearchBar";
+import { useAuth } from "@/service/AuthProvider";
+import LoadingSpinner from "@/component/loading-indicator/RouteLoader";
 
 function ProjectsPage() {
   const [filteredProjects, setFilteredProjects] = useState(sampleProjects);
+  const { user, authLoading } = useAuth();
+
 
   const handleSearchResults = useCallback((results) => {
     setFilteredProjects(results);
@@ -26,6 +30,9 @@ function ProjectsPage() {
       `/dashboard/project/${encodeURIComponent(projectid)}/${section}`
     );
   };
+
+  if (authLoading) return <LoadingSpinner/>;
+  // if (!user) return <p>Unauthorized</p>;
 
   return (
     <div
