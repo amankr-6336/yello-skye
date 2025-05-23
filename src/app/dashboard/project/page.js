@@ -44,6 +44,7 @@ function ProjectsPage() {
       <div style={{ display: "flex", gap: "15px", flexWrap: "wrap" }}>
         {filteredProjects.map((project, index) => (
           <Card
+            size="projectBox"
             variant="outlined"
             key={index}
             onClick={() => handleCardClick(project.id)}

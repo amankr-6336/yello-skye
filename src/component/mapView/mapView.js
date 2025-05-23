@@ -105,7 +105,7 @@ export default function ProjectMap() {
   }, [router]);
 
   return (
-    <div style={{ width: "100%", height: "500px", position: "relative" }}>
+    <div style={{ width: "100%", height: "calc(100vh - 100px)", position: "relative" }}>
       <div ref={mapRef} style={{ width: "100%", height: "100%" }}></div>
       <div ref={tooltipRef} style={{ position: "absolute", display: "none", pointerEvents: "none" }}></div>
     </div>
