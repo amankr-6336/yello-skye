@@ -5,9 +5,9 @@
   transition: box-shadow 0.3s ease;
   overflow: hidden;
 }
-.card:hover{
+/* .card:hover{
   cursor: pointer;
-}
+} */
 
 /* Variants */
 .default {
@@ -41,7 +41,7 @@
 }
 
 .medium {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 8px -2px rgba(9, 30, 66, 0.25), 0px 0px 0px 1px rgba(9, 30, 66, 0.08);
 }
 
 .large {
@@ -63,4 +63,8 @@
 .authBox{
   width: 400px;
   height: fit-content;
+}
+
+.pointer{
+  cursor: pointer;
 }

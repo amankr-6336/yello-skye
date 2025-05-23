@@ -51,6 +51,7 @@ function ProjectsPage() {
       <div style={{ display: "flex", gap: "15px", flexWrap: "wrap" }}>
         {filteredProjects.map((project, index) => (
           <Card
+            pointer="pointer"
             size="projectBox"
             variant="outlined"
             key={index}

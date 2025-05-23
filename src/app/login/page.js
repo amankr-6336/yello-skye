@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import Button from "@/component/common-ui/button/Button.js";
 import Input from "@/component/common-ui/input/Input.js";
 import Link from "next/link";
+import Card from "@/component/common-ui/card/Card.js";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -61,29 +62,54 @@ export default function LoginPage() {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: "auto", paddingTop: 100 }}>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <Input
-          label="Email"
-          type="email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <Input
-          label="Password"
-          type="password"
-          placeholder="Password (6+ characters)"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        <Button size="small" type="primary">
-          {loading ? "Logging in..." : "Login"}
-        </Button>
-        <Link href="/forgot-password">Forgot Password?</Link>
-      </form>
+    <div
+      style={{
+        width: "100vw",
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Card size="authBox">
+        <div style={{ display: "flex", gap: "10px", flexDirection: "column" }}>
+          <h2>Login</h2>
+          <form onSubmit={handleLogin}>
+            <Input
+              label="Email"
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Input
+              label="Password"
+              type="password"
+              placeholder="Password (6+ characters)"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            
+          </form>
+          <div style={{ textAlign: "right", color: "grey" }}>
+              <Link href="/forgot-password">Forgot Password?</Link>
+            </div>
+            
+          
+            <Button size="small" type="primary" onClick={handleLogin}>
+              {loading ? "Logging in..." : "Login"}
+            </Button>
+            
+
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <p>Do you have an Account ? </p>{" "}
+            <Link href="/signUp" style={{ color: "blue", marginLeft: "5px" }}>
+              {" "}
+              SignUp
+            </Link>
+          </div>
+        </div>
+      </Card>
     </div>
   );
 }

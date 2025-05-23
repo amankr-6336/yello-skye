@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Input from "@/component/common-ui/input/Input";
 import Button from "@/component/common-ui/button/Button";
+import Card from "@/component/common-ui/card/Card";
+import Link from "next/link";
 
 export default function SignupPage() {
   const [email, setEmail] = useState("");
@@ -56,37 +58,53 @@ export default function SignupPage() {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: "auto", paddingTop: 100 }}>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSignup}>
-        <Input
-          label="Name"
-          type="text"
-          placeholder="Name"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
-        />
-        <Input
-          label="Email"
-          type="email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <Input
-          label="Password"
-          type="password"
-          placeholder="Password (6+ characters)"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-
-        {error && <p style={{ color: "red" }}>{error}</p>}
-
-        <Button size="small" type="primary">
-          {loading ? "Signing in..." : "SignIn"}
-        </Button>
-      </form>
+    <div
+      style={{
+        width: "100vw",
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Card size="authBox">
+        <div style={{ display: "flex", gap: "10px", flexDirection: "column" }}>
+          <h2>Sign Up</h2>
+          <form onSubmit={handleSignup}>
+            <Input
+              label="Name"
+              type="text"
+              placeholder="Name"
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
+            />
+            <Input
+              label="Email"
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Input
+              label="Password"
+              type="password"
+              placeholder="Password (6+ characters)"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </form>
+          <Button size="small" type="primary" onClick={handleSignup}>
+            {loading ? "Signing in..." : "SignIn"}
+          </Button>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <p>Already have an Account ? </p>{" "}
+            <Link href="/login" style={{ color: "blue", marginLeft: "5px" }}>
+              {" "}
+              Login
+            </Link>
+          </div>
+        </div>
+      </Card>
     </div>
   );
 }

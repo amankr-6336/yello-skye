@@ -2,42 +2,57 @@
 import React, { useState } from "react";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "@/lib/firebase/Firebase";
+import Card from "@/component/common-ui/card/Card";
+import toast from "react-hot-toast";
+import Input from "@/component/common-ui/input/Input";
+import Button from "@/component/common-ui/button/Button";
+import { useRouter } from "next/navigation";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
+  const router=useRouter();
 
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage("");
-    setError("");
+
 
     try {
       await sendPasswordResetEmail(auth, email);
-      setMessage("Password reset email sent. Please check your inbox.");
+      toast.success("Reset Password has been sent to Email");
+      router.push('/login');
+
     } catch (err) {
       setError(err.message);
+      toast.error("Oops !! Error");
     }
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Forgot Password</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Enter your email"
-          value={email}
-          required
-          onChange={(e) => setEmail(e.target.value)}
-          style={{ padding: "8px", marginBottom: "10px", width: "100%" }}
-        />
-        <button type="submit">Send Reset Link</button>
-      </form>
-
-      {message && <p style={{ color: "green" }}>{message}</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+    <div
+      style={{
+        width: "100vw",
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Card size="authBox">
+        <div style={{ display: "flex", gap: "10px", flexDirection: "column" }}>
+          <h2>Forgot Password</h2>
+          <form onSubmit={handleSubmit}>
+            <Input
+              label="Email"
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Button  size="small" type="primary">Send Reset Link</Button>
+          </form>
+        </div>
+      </Card>
     </div>
   );
 }
