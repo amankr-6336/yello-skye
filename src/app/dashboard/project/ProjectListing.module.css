@@ -1,3 +1,15 @@
+.header{
+    display: flex;
+    padding: 0px;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.header h3{
+    flex: 1;
+}
+
+
 .cardSection{
     display: flex;
     flex-direction: column;

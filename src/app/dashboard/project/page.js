@@ -1,15 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState ,useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { sampleProjects } from "@/sampledata/Data";
 import Card from "@/component/common-ui/card/Card";
 import Button from "@/component/common-ui/button/Button";
-import styles from  './ProjectListing.module.css'
+import styles from "./ProjectListing.module.css";
+import SearchBar from "@/component/searchbar/SearchBar";
 
 function ProjectsPage() {
- 
-  const router=useRouter();
+  const [filteredProjects, setFilteredProjects] = useState(sampleProjects);
+
+  const handleSearchResults = useCallback((results) => {
+    setFilteredProjects(results);
+  }, []);
+
+  const router = useRouter();
   const handleCardClick = (projectid) => {
     router.push(`/dashboard/project/${encodeURIComponent(projectid)}`);
   };
@@ -28,12 +34,15 @@ function ProjectsPage() {
         height: "fit-content",
       }}
     >
-      <div style={{ marginBottom: "20px" }}>
-        <h3 style={{ margin: "10px" }}> Projects</h3>
+      <div className={styles.header}>
+        <SearchBar
+          projects={sampleProjects}
+          onSearchResults={handleSearchResults}
+        />
       </div>
 
       <div style={{ display: "flex", gap: "15px", flexWrap: "wrap" }}>
-        {sampleProjects.map((project, index) => (
+        {filteredProjects.map((project, index) => (
           <Card
             variant="outlined"
             key={index}
