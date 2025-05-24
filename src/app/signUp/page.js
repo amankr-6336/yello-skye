@@ -1,26 +1,29 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+// auth function and file
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../lib/firebase/Firebase";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
+// components
 import Input from "@/component/common-ui/input/Input";
 import Button from "@/component/common-ui/button/Button";
 import Card from "@/component/common-ui/card/Card";
-import Link from "next/link";
+// services and dependencies
+import { getFriendlyErrorSignup } from "@/service/ErrorMessage";
+import toast from "react-hot-toast";
 
 export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  // signUp logic
   const handleSignup = async (e) => {
     e.preventDefault();
-    setError("");
 
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -28,32 +31,17 @@ export default function SignupPage() {
         email,
         password
       );
+      // to send name also along with the email and password
       await updateProfile(userCredential.user, {
         displayName: userName,
       });
-
-      toast.success("Signup successful! 🎉 Redirecting...");
-      console.log(userCredential);
-      setTimeout(() => router.push("/dashboard"), 1000);
+      toast.success("Signup successful! 🎉");
+      setTimeout(() => router.push("/dashboard/project"), 500);
     } catch (err) {
-      const friendlyMessage = getFriendlyError(err.code);
-      setError(friendlyMessage);
+      const friendlyMessage = getFriendlyErrorSignup(err.code);
       toast.error(friendlyMessage);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const getFriendlyError = (code) => {
-    switch (code) {
-      case "auth/email-already-in-use":
-        return "Email is already in use.";
-      case "auth/invalid-email":
-        return "Invalid email address.";
-      case "auth/weak-password":
-        return "Password should be at least 6 characters.";
-      default:
-        return "Something went wrong. Please try again.";
     }
   };
 

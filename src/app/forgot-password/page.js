@@ -1,27 +1,27 @@
 "use client";
+
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+// Auth function and files
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "@/lib/firebase/Firebase";
-import Card from "@/component/common-ui/card/Card";
+// components
 import toast from "react-hot-toast";
+import Card from "@/component/common-ui/card/Card";
 import Input from "@/component/common-ui/input/Input";
 import Button from "@/component/common-ui/button/Button";
-import { useRouter } from "next/navigation";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
-  const router=useRouter();
+  const router = useRouter();
 
- 
+  // logout logic
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-
     try {
       await sendPasswordResetEmail(auth, email);
       toast.success("Reset Password has been sent to Email");
-      router.push('/login');
-
+      router.push("/login");
     } catch (err) {
       setError(err.message);
       toast.error("Oops !! Error");
@@ -49,7 +49,9 @@ export default function ForgotPassword() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <Button  size="small" type="primary">Send Reset Link</Button>
+            <Button size="small" type="primary">
+              Send Reset Link
+            </Button>
           </form>
         </div>
       </Card>

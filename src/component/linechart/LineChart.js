@@ -6,7 +6,6 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  Legend,
   CartesianGrid,
   ResponsiveContainer,
 } from 'recharts';
@@ -28,18 +27,45 @@ const chartData = [
 
 export default function ResponsiveLineChart() {
   return (
-    <div style={{ width: '100%', height: 300 }}>
-      <ResponsiveContainer>
+    <div style={{ width: '100%', height: 350 }}>
+
+      <h2 style={{ textAlign: 'center', marginBottom: 10 }}>Monthly Progress vs Planned</h2>
+
+
+      <ResponsiveContainer width="100%" height={250}>
         <LineChart data={chartData} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid strokeDasharray="3 3" horizontal={false} />
           <XAxis dataKey="month" />
           <YAxis />
           <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="planned" stroke="#8884d8" strokeWidth={2} />
-          <Line type="monotone" dataKey="progress" stroke="#82ca9d" strokeWidth={2} />
+          <Line
+            type="linear"
+            dataKey="planned"
+            stroke="#FF6363"
+            strokeWidth={2}
+            dot={{ r: 5, strokeWidth: 0, fill: '#FF6363' }}
+          />
+          <Line
+            type="monotone"
+            dataKey="progress"
+            stroke="#3A59D1"
+            strokeWidth={2}
+            dot={{ r: 5, strokeWidth: 0, fill: '#3A59D1' }}
+          />
         </LineChart>
       </ResponsiveContainer>
+
+   
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: 10, gap: 20 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <div style={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#FF6363' }} />
+          <span>Planned</span>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <div style={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#3A59D1' }} />
+          <span>Progress</span>
+        </div>
+      </div>
     </div>
   );
 }

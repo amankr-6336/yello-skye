@@ -5,10 +5,7 @@ export function middleware(request) {
   const token = request.cookies.get("firebaseToken")?.value;
   const path = url.pathname;
 
-
-
   if (path === "/") {
-    console.log("main")
     if (token) {
       url.pathname = "/dashboard/project";
     } else {
@@ -18,8 +15,14 @@ export function middleware(request) {
   }
 
   if (path.startsWith("/dashboard") && !token) {
-    console.log("dahs")
     url.pathname = "/login";
+    return NextResponse.redirect(url);
+  }
+
+  const authPages = ["/login", "/signUp", "/forgot-password"];
+
+  if (authPages.includes(path) && token) {
+    url.pathname = "/dashboard/project";
     return NextResponse.redirect(url);
   }
 
@@ -27,5 +30,5 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: ["/", "/dashboard/:path*"],
+  matcher: ["/", "/login", "/signUp", "/forgot-password", "/dashboard/:path*"],
 };

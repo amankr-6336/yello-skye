@@ -27,7 +27,7 @@ export default function ProjectMap() {
         name: project.name,
         lat: project.location.lat,
         lng: project.location.lng,
-        id: project.id, // important for routing
+        id: project.id, 
       });
 
       feature.setStyle(

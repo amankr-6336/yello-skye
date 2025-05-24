@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 
-export default function LoadingSpinner() {
+export default function Spinner() {
   const pathname = usePathname();
   const [loading, setLoading] = useState(false);
 

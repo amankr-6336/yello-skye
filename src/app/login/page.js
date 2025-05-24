@@ -1,63 +1,39 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+// Auth function and files
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../lib/firebase/Firebase.js";
 import { useRouter } from "next/navigation";
+// components
 import toast from "react-hot-toast";
 import Button from "@/component/common-ui/button/Button.js";
 import Input from "@/component/common-ui/input/Input.js";
-import Link from "next/link";
 import Card from "@/component/common-ui/card/Card.js";
+// services error message data
+import { getFriendlyErrorLogin } from "@/service/ErrorMessage.js";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  // logic and handle login of User
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError("");
-    setLoading(true); // ✅ Start loader
+    setLoading(true);
 
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
-      console.log(response);
-      toast.success("Login successful! 🎉 Redirecting...");
-      setTimeout(() => router.push("/dashboard/project"), 1000);
+      toast.success("Login successful! 🎉");
+      setTimeout(() => router.push("/dashboard/project"), 500);
     } catch (err) {
-      const friendlyMessage = getFriendlyError(err.code);
-      setError(friendlyMessage);
+      const friendlyMessage = getFriendlyErrorLogin(err.code);
       toast.error(friendlyMessage);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const getFriendlyError = (code) => {
-    switch (code) {
-      case "auth/invalid-email":
-        return "Please enter a valid email address.";
-      case "auth/user-disabled":
-        return "This user account has been disabled.";
-      case "auth/user-not-found":
-        return "No account found with this email address.";
-      case "auth/wrong-password":
-        return "Incorrect password. Please try again.";
-      case "auth/too-many-requests":
-        return "Too many failed attempts. Please wait and try again later.";
-      case "auth/missing-password":
-        return "Please enter your password.";
-      case "auth/internal-error":
-        return "An internal error occurred. Please try again.";
-      case "auth/network-request-failed":
-        return "Network error. Please check your internet connection.";
-      case "auth/invalid-credential":
-        return "Invalid login credentials. Please try again.";
-      default:
-        return "Something went wrong. Please try again.";
     }
   };
 
@@ -89,17 +65,14 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            
           </form>
           <div style={{ textAlign: "right", color: "grey" }}>
-              <Link href="/forgot-password">Forgot Password?</Link>
-            </div>
-            
-          
-            <Button size="small" type="primary" onClick={handleLogin}>
-              {loading ? "Logging in..." : "Login"}
-            </Button>
-            
+            <Link href="/forgot-password">Forgot Password?</Link>
+          </div>
+
+          <Button size="small" type="primary" onClick={handleLogin}>
+            {loading ? "Logging in..." : "Login"}
+          </Button>
 
           <div style={{ display: "flex", justifyContent: "center" }}>
             <p>Do you have an Account ? </p>{" "}

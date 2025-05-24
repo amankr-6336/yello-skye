@@ -1,19 +1,25 @@
 "use client";
+
 import { useParams, useRouter } from "next/navigation";
+// components
 import Button from "@/component/common-ui/button/Button";
-import { sampleProjects } from "@/sampledata/Data";
-import SingleProjectMap from "@/component/projectMapview/SingleProjectMapView";
-import styles from "./projectDetail.module.css";
 import StatusLabel from "@/component/common-ui/statusLabel/StatusLabel";
+import SingleProjectMap from "@/component/projectMapview/SingleProjectMapView";
+// data
+import { sampleProjects } from "@/sampledata/Data";
+// css
+import styles from "./projectDetail.module.css";
+
 export default function ProjectDetailsPage() {
-  const params=useParams();
+  const params = useParams();
   const projectId = params.projectId;
   const router = useRouter();
 
+  // getting info of clicked project
   const project = sampleProjects.find((data) => Number(projectId) === data.id);
 
+  // for navigation of section
   const handleNavigateSection = (section) => {
-    // You can also use project.id or a slug instead
     router.push(`/dashboard/project/${projectId}/${section}`);
   };
 

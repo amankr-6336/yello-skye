@@ -4,7 +4,6 @@ import styles from './statusLable.module.css'
 
 export default function StatusLabel({status}) {
    const className=`${styles[status]}`
-   console.log(status)
   return (
      <span className={className}>{status}</span>
   )

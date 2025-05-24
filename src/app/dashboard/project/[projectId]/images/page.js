@@ -1,10 +1,16 @@
 import React from "react";
+// data
 import { sampleProjects } from "@/sampledata/Data";
+// component
 import Card from "@/component/common-ui/card/Card";
+// icons
 import { FaImages } from "react-icons/fa";
+
 function page({ params }) {
   const projectId = params.projectId;
+  // get the image of selected project from params
   const project = sampleProjects.find((data) => Number(projectId) === data.id);
+
   return (
     <div style={{ padding: "10px" }}>
       <h3 style={{ margin: "10px" }}> Images</h3>
