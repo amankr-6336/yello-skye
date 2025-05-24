@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Project Management Dashboard
 
-## Getting Started
+A modern project management dashboard built with Next.js App Router, Firebase Auth, reusable UI components, middleware-based routing, and sample data visualizations using Recharts.
 
-First, run the development server:
+**Features**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- 🔐 Firebase Authentication (Login, Sign-up, Forgot Password)
+- 🔄 Middleware-based route protection
+- 📊 Line charts with Recharts
+- 🔍 Search with debounce
+- 📹 Project video listing
+- 🧱 Reusable components (Card, StatusLabel, etc.)
+- 📁 Modular folder structure
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+**setup description**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. clone repo
+    - git clone https://github.com/your-username/project-dashboard.git
+    - cd project-dashboard
 
-## Learn More
+2. install dependencies
+    - npm install
 
-To learn more about Next.js, take a look at the following resources:
+3. Add firebase configuration (create .env.local file in root )
+    - NEXT_PUBLIC_FIREBASE_API_KEY
+    - NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+    - NEXT_PUBLIC_FIREBASE_PROJECT_ID
+    - NEXT_PUBLIC_FIREBASE_APP_ID
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Run the app 
+    - npm run dev
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Deplyoyed link - https://yello-skye.netlify.app/    
+     
+    
