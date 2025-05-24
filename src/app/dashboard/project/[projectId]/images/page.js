@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 // data
 import { sampleProjects } from "@/sampledata/Data";
@@ -5,8 +7,10 @@ import { sampleProjects } from "@/sampledata/Data";
 import Card from "@/component/common-ui/card/Card";
 // icons
 import { FaImages } from "react-icons/fa";
+import { useParams } from "next/navigation";
 
-function page({ params }) {
+function Page() {
+  const params = useParams();
   const projectId = params.projectId;
   // get the image of selected project from params
   const project = sampleProjects.find((data) => Number(projectId) === data.id);
@@ -15,7 +19,7 @@ function page({ params }) {
     <div style={{ padding: "10px" }}>
       <h3 style={{ margin: "10px" }}> Images</h3>
       <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-        {project.videos.map((data, index) => (
+        {project.images.map((data, index) => (
           <Card key={index} size="contentBox" padding="small" shadow="medium">
             <div
               style={{
@@ -46,4 +50,4 @@ function page({ params }) {
   );
 }
 
-export default page;
+export default Page;

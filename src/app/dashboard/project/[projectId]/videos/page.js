@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 // data
 import { sampleProjects } from "@/sampledata/Data";
@@ -5,8 +7,10 @@ import { sampleProjects } from "@/sampledata/Data";
 import Card from "@/component/common-ui/card/Card";
 // icons
 import { FaFileVideo } from "react-icons/fa";
+import { useParams } from "next/navigation";
 
-function video({ params }) {
+function Video() {
+  const params = useParams();
   const projectId = params.projectId;
   // getting video of selected project
   const project = sampleProjects.find((data) => Number(projectId) === data.id);
@@ -45,4 +49,4 @@ function video({ params }) {
   );
 }
 
-export default video;
+export default Video;

@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react";
 import { sampleProjects } from "@/sampledata/Data";
 import MapView from "@/component/mapView/mapView";

@@ -1,3 +1,4 @@
+"use client"
 import ResponsiveLineChart from "@/component/linechart/LineChart";
 import React from "react";
 
